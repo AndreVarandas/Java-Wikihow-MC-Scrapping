@@ -1,7 +1,7 @@
 # Java Basic - Wikihow MC Scrapping
 
 Just some code I threw into eclipse, to revive and maybe improve my own Java skills.
-There is nothing better than writting a scrapper, so let's get some content about Minecraft in Wikihow.
+There is nothing better than writting a scrapper, so let's get some content about Minecraft from Wikihow.
 
 This project makes use of Jsoup and sqlite.
 
