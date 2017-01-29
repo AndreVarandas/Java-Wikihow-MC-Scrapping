@@ -22,10 +22,8 @@ public class SQLIteConnector {
             // Create the table
             stmt = connection.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS Article "
-                    + "(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," 
-                    + " TITLE          TEXT     NOT NULL, "
-                    + " URL            TEXT     NOT NULL, " 
-                    + " IMG_URL        TEXT)";
+                    + "(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," + " TITLE          TEXT     NOT NULL, "
+                    + " URL            TEXT     NOT NULL, " + " IMG_URL        TEXT)";
 
             stmt.executeUpdate(sql);
             stmt.close();
