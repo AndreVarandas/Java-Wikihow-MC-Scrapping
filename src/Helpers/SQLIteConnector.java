@@ -10,89 +10,91 @@ import source.Article;
 
 public class SQLIteConnector {
 
-	private Connection connection = null;
-	private Statement stmt = null;
-	private static final String INSERT_SQL = "INSERT INTO Article (TITLE, URL, IMG_URL) values(?,?,?)";
+    private Connection          connection = null;
+    private Statement           stmt       = null;
+    private static final String INSERT_SQL = "INSERT INTO Article (TITLE, URL, IMG_URL) values(?,?,?)";
 
-	public void init() {
-		
-		try {
-			// Open connection 
-			connection = openDB();
-			// Create the table
-			stmt = connection.createStatement();
-			String sql = "CREATE TABLE IF NOT EXISTS Article "
-					+ "(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," + " TITLE          TEXT     NOT NULL, "
-					+ " URL            TEXT     NOT NULL, " + " IMG_URL       	TEXT)";
+    public void init() {
 
-			stmt.executeUpdate(sql);
-			stmt.close();
-			connection.close();
-			System.out.println("Table created successfully");
+        try {
+            // Open connection
+            connection = openDB();
+            // Create the table
+            stmt = connection.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS Article "
+                    + "(ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," 
+                    + " TITLE          TEXT     NOT NULL, "
+                    + " URL            TEXT     NOT NULL, " 
+                    + " IMG_URL        TEXT)";
 
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
-		}
-	}
+            stmt.executeUpdate(sql);
+            stmt.close();
+            connection.close();
+            System.out.println("Table created successfully");
 
-	/**
-	 * Inserts an article into the article table.
-	 * 
-	 * @param article
-	 */
-	public void InsertArticle(Article article) {
-		PreparedStatement preparedStatement = null;
-		connection = null;
-		try {
-			connection = openDB();
-			connection.setAutoCommit(false);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
 
-			preparedStatement = connection.prepareStatement(INSERT_SQL);
-			preparedStatement.setString(1, article.getmTitle());
-			preparedStatement.setString(2, article.getmUrl());
-			preparedStatement.setString(3, article.getmImgUrl());
+    /**
+     * Inserts an article into the article table.
+     * 
+     * @param article
+     */
+    public void InsertArticle(Article article) {
+        PreparedStatement preparedStatement = null;
+        connection = null;
+        try {
+            connection = openDB();
+            connection.setAutoCommit(false);
 
-			preparedStatement.executeUpdate();
-			connection.commit();
+            preparedStatement = connection.prepareStatement(INSERT_SQL);
+            preparedStatement.setString(1, article.getmTitle());
+            preparedStatement.setString(2, article.getmUrl());
+            preparedStatement.setString(3, article.getmImgUrl());
 
-		} catch (SQLException e) {
-			System.out.println("Could not insert into table: " + e.getMessage());
-		} finally {
-			closeDBConnection(preparedStatement, connection);
-		}
-	}
+            preparedStatement.executeUpdate();
+            connection.commit();
 
-	/**
-	 * Gets an instance of the connector, Opens the database.
-	 * 
-	 * @return Connection
-	 */
-	public Connection openDB() {
-		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:test.db");
-			connection.setAutoCommit(false);
-			System.out.println("Opened database successfully");
+        } catch (SQLException e) {
+            System.out.println("Could not insert into table: " + e.getMessage());
+        } finally {
+            closeDBConnection(preparedStatement, connection);
+        }
+    }
 
-		} catch (SQLException e) {
-			System.out.println("Could not insert into table: " + e.getMessage());
-		}
-		return connection;
-	}
+    /**
+     * Gets an instance of the connector, Opens the database.
+     * 
+     * @return Connection
+     */
+    public Connection openDB() {
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            connection.setAutoCommit(false);
+            System.out.println("Opened database successfully");
 
-	/**
-	 * Closes the database connection
-	 * 
-	 * @param statement
-	 */
-	private void closeDBConnection(Statement statement, Connection connection) {
-		try {
-			if (statement != null) {
-				statement.close();
-				connection.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        } catch (SQLException e) {
+            System.out.println("Could not insert into table: " + e.getMessage());
+        }
+        return connection;
+    }
+
+    /**
+     * Closes the database connection
+     * 
+     * @param statement
+     */
+    private void closeDBConnection(Statement statement, Connection connection) {
+        try {
+            if (statement != null) {
+                statement.close();
+                connection.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

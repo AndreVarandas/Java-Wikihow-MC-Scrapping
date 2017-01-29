@@ -1,43 +1,42 @@
 package source;
 
 public class Article {
-	
-	// Class members
-	private String mTitle;
-	private String mUrl;
-	private String mImgUrl;
 
-	// Constructor
-	public Article(String Title, String Url, String ImgUrl) {
-		mTitle = Title;
-		mUrl = Url;
-		mImgUrl = ImgUrl;
-	}
-	
-	
-	// Getters and setters
-	public String getmTitle() {
-		return mTitle;
-	}
+    // Class members
+    private String mTitle;
+    private String mUrl;
+    private String mImgUrl;
 
-	public void setmTitle(String mTitle) {
-		this.mTitle = mTitle;
-	}
+    // Constructor
+    public Article(String Title, String Url, String ImgUrl) {
+        mTitle = Title;
+        mUrl = Url;
+        mImgUrl = ImgUrl;
+    }
 
-	public String getmUrl() {
-		return mUrl;
-	}
+    // Getters and setters
+    public String getmTitle() {
+        return mTitle;
+    }
 
-	public void setmUrl(String mUrl) {
-		this.mUrl = mUrl;
-	}
+    public void setmTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
 
-	public String getmImgUrl() {
-		return mImgUrl;
-	}
+    public String getmUrl() {
+        return mUrl;
+    }
 
-	public void setmImgUrl(String mImgUrl) {
-		this.mImgUrl = mImgUrl;
-	}
+    public void setmUrl(String mUrl) {
+        this.mUrl = mUrl;
+    }
+
+    public String getmImgUrl() {
+        return mImgUrl;
+    }
+
+    public void setmImgUrl(String mImgUrl) {
+        this.mImgUrl = mImgUrl;
+    }
 
 }
